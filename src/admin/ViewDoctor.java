@@ -43,8 +43,13 @@ public class ViewDoctor extends JFrame implements ActionListener {
         gbc.gridwidth = 3;
         viewDoctor.add(heading,gbc);
         back = new JButton("Back");
-        back.setActionCommand("back");
-        back.addActionListener(this);
+        back.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                new Admin();
+                setVisible(false);
+            }
+        });
         gbc.gridx = 4;
         viewDoctor.add(back,gbc);
 
@@ -190,11 +195,7 @@ public class ViewDoctor extends JFrame implements ActionListener {
             viewDoctorProfile(id);
         } else if ("remove".equals(btn.getActionCommand())) {
             removeDoctor(id);
-        } else if ("back".equals(btn.getActionCommand())) {
-            new Admin();
-            setVisible(false);
         }
-
     }
 
 }

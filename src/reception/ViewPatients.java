@@ -11,17 +11,21 @@ import java.awt.event.ActionListener;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.util.ArrayList;
+import java.util.List;
 
 class ViewPatients extends JFrame implements ActionListener {
 
     Connection con;
     JPanel panel;
-    JButton back;
+    JButton back ;
     GridBagConstraints gbc;
     ResultSet resultSet;
     int y = 0;
     int patientId;
     String currentDate;
+    JButton assignedDocBtn;
+    private List<JButton> assignedBtn = new ArrayList<>();
 
     public ViewPatients(String currentDate){
         this.currentDate = currentDate;
@@ -124,61 +128,135 @@ class ViewPatients extends JFrame implements ActionListener {
         gbc.insets = new Insets(10, 20, 10, 20);
         try{
             patientId = rs.getInt("id");
-            JLabel id = new JLabel(String.valueOf(patientId));
-            id.setFont(new Font("Times New Roman",Font.BOLD,20));
-            gbc.gridy = y;
-            gbc.gridx = 0;
-            gbc.gridwidth = 1;
-            panel.add(id,gbc);
-            JLabel name = new JLabel(rs.getString("name"));
-            name.setFont(new Font("Times New Roman",Font.BOLD,20));
-            gbc.gridx = 1;
-            gbc.gridwidth = 3;
-            panel.add(name,gbc);
-            JLabel condition = new JLabel(rs.getString("patientCondition"));
-            condition.setFont(new Font("Times New Roman",Font.BOLD,20));
-            gbc.gridx = 4;
-            gbc.gridwidth = 4;
-            panel.add(condition,gbc);
-            JLabel date = new JLabel(rs.getString("admissionDate"));
-            date.setFont(new Font("Times New Roman",Font.BOLD,20));
-            gbc.gridx = 8;
-            gbc.gridwidth = 2;
-            panel.add(date,gbc);
-            JLabel age = new JLabel(rs.getString("age"));
-            age.setFont(new Font("Times New Roman",Font.BOLD,20));
-            gbc.gridy = y;
-            gbc.gridx = 10;
-            gbc.gridwidth = 1;
-            panel.add(age,gbc);
-            JLabel contact = new JLabel(rs.getString("contact"));
-            contact.setFont(new Font("Times New Roman",Font.BOLD,20));
-            gbc.gridy = y;
-            gbc.gridx = 11;
-            gbc.gridwidth = 2;
-            panel.add(contact,gbc);
-            JLabel docAssigned = new JLabel(rs.getString("assigned"));
-            docAssigned.setFont(new Font("Times New Roman",Font.BOLD,20));
-            gbc.gridy = y;
-            gbc.gridx = 13;
-            gbc.gridwidth = 1;
-            panel.add(docAssigned,gbc);
-            JLabel roomNo = new JLabel(rs.getString("room"));
-            roomNo.setFont(new Font("Times New Roman",Font.BOLD,20));
-            gbc.gridy = y;
-            gbc.gridx = 14;
-            gbc.gridwidth = 1;
-            panel.add(roomNo,gbc);
+            System.out.println(patientId);
+            boolean assigned = rs.getBoolean("assigned");
+            String isAssigned = "Yes";
+            if(!assigned){
+                isAssigned = "No";
+                JLabel id = new JLabel(String.valueOf(patientId));
+                id.setFont(new Font("Times New Roman",Font.BOLD,20));
+                gbc.gridy = y;
+                gbc.gridx = 0;
+                gbc.gridwidth = 1;
+                panel.add(id,gbc);
+                JLabel name = new JLabel(rs.getString("name"));
+                name.setFont(new Font("Times New Roman",Font.BOLD,20));
+                gbc.gridx = 1;
+                gbc.gridwidth = 3;
+                panel.add(name,gbc);
+                JLabel condition = new JLabel(rs.getString("patientCondition"));
+                condition.setFont(new Font("Times New Roman",Font.BOLD,20));
+                gbc.gridx = 4;
+                gbc.gridwidth = 4;
+                panel.add(condition,gbc);
+                JLabel date = new JLabel(rs.getString("admissionDate"));
+                date.setFont(new Font("Times New Roman",Font.BOLD,20));
+                gbc.gridx = 8;
+                gbc.gridwidth = 2;
+                panel.add(date,gbc);
+                JLabel age = new JLabel(rs.getString("age"));
+                age.setFont(new Font("Times New Roman",Font.BOLD,20));
+                gbc.gridy = y;
+                gbc.gridx = 10;
+                gbc.gridwidth = 1;
+                panel.add(age,gbc);
+                JLabel contact = new JLabel(rs.getString("contact"));
+                contact.setFont(new Font("Times New Roman",Font.BOLD,20));
+                gbc.gridy = y;
+                gbc.gridx = 11;
+                gbc.gridwidth = 2;
+                panel.add(contact,gbc);
+                JLabel docAssigned = new JLabel(isAssigned);
+                docAssigned.setFont(new Font("Times New Roman",Font.BOLD,20));
+                gbc.gridy = y;
+                gbc.gridx = 13;
+                gbc.gridwidth = 1;
+                panel.add(docAssigned,gbc);
+                JLabel roomNo = new JLabel(rs.getString("room"));
+                roomNo.setFont(new Font("Times New Roman",Font.BOLD,20));
+                gbc.gridy = y;
+                gbc.gridx = 14;
+                gbc.gridwidth = 1;
+                panel.add(roomNo,gbc);
+                assignedDocBtn = new MyButton(rs.getString("room"),20);
+                assignedDocBtn.setFont(new Font("Times New Roman",Font.BOLD,20));
+                assignedDocBtn.putClientProperty("id",patientId);
+                assignedDocBtn.setActionCommand("assigned");
+                assignedBtn.add(assignedDocBtn);
+                assignedDocBtn.addActionListener(this);
+                gbc.gridy = y;
+                gbc.gridx = 16;
+                gbc.gridwidth = 1;
+                panel.add(assignedDocBtn,gbc);
+            }
+            else {
+                JLabel id = new JLabel(String.valueOf(patientId));
+                id.setFont(new Font("Times New Roman",Font.BOLD,20));
+                gbc.gridy = y;
+                gbc.gridx = 0;
+                gbc.gridwidth = 1;
+                panel.add(id,gbc);
+                JLabel name = new JLabel(rs.getString("name"));
+                name.setFont(new Font("Times New Roman",Font.BOLD,20));
+                gbc.gridx = 1;
+                gbc.gridwidth = 3;
+                panel.add(name,gbc);
+                JLabel condition = new JLabel(rs.getString("patientCondition"));
+                condition.setFont(new Font("Times New Roman",Font.BOLD,20));
+                gbc.gridx = 4;
+                gbc.gridwidth = 4;
+                panel.add(condition,gbc);
+                JLabel date = new JLabel(rs.getString("admissionDate"));
+                date.setFont(new Font("Times New Roman",Font.BOLD,20));
+                gbc.gridx = 8;
+                gbc.gridwidth = 2;
+                panel.add(date,gbc);
+                JLabel age = new JLabel(rs.getString("age"));
+                age.setFont(new Font("Times New Roman",Font.BOLD,20));
+                gbc.gridy = y;
+                gbc.gridx = 10;
+                gbc.gridwidth = 1;
+                panel.add(age,gbc);
+                JLabel contact = new JLabel(rs.getString("contact"));
+                contact.setFont(new Font("Times New Roman",Font.BOLD,20));
+                gbc.gridy = y;
+                gbc.gridx = 11;
+                gbc.gridwidth = 2;
+                panel.add(contact,gbc);
+                JLabel docAssigned = new JLabel(isAssigned);
+                docAssigned.setFont(new Font("Times New Roman",Font.BOLD,20));
+                gbc.gridy = y;
+                gbc.gridx = 13;
+                gbc.gridwidth = 1;
+                panel.add(docAssigned,gbc);
+                JLabel roomNo = new JLabel(rs.getString("room"));
+                roomNo.setFont(new Font("Times New Roman",Font.BOLD,20));
+                gbc.gridy = y;
+                gbc.gridx = 14;
+                gbc.gridwidth = 1;
+                panel.add(roomNo,gbc);
+            }
+
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
     }
 
     public void actionPerformed(ActionEvent event){
-       if(event.getSource()==back){
-           new Reception();
-           setVisible(false);
-       }
+
+        if(event.getSource()==back){
+            new Reception();
+            setVisible(false);
+            return;
+        }
+
+        JButton btn = (JButton) event.getSource();
+        Integer id = (int) btn.getClientProperty("id");
+        if("assigned".equals(btn.getActionCommand())){
+                new AssignedDoctor();
+                return;
+        }
     }
+
 }
 

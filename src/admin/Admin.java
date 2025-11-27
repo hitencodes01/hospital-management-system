@@ -75,6 +75,24 @@ public class Admin extends JFrame implements ActionListener {
 
         menuVisitors.add(viewVisitors);
 
+
+        JLabel quotation1 = new JLabel("Healing takes time,");
+        quotation1.setFont(new Font("Algerian", Font.BOLD, 40));
+        quotation1.setBounds(500, 250, 1600, 200);
+        adminPanel.add(quotation1);
+        JLabel quotation2 = new JLabel("and asking for help is a courageous step. ");
+        quotation2.setFont(new Font("Algerian", Font.BOLD, 40));
+        quotation2.setBounds(300, 295, 1600, 200);
+        adminPanel.add(quotation2);
+        JLabel quotation3 = new JLabel("Trust the process, ");
+        quotation3.setFont(new Font("Algerian", Font.BOLD, 40));
+        quotation3.setBounds(500, 340, 1600, 200);
+        adminPanel.add(quotation3);
+        JLabel quotation4 = new JLabel("and brighter days will come.");
+        quotation4.setFont(new Font("Algerian", Font.BOLD, 40));
+        quotation4.setBounds(400, 385, 1600, 200);
+        adminPanel.add(quotation4);
+
 //        adding menus
         adminMenu.add(menuDoctor);
         adminMenu.add(Box.createHorizontalStrut(40)); // spacing between menus
@@ -90,7 +108,8 @@ public class Admin extends JFrame implements ActionListener {
         backToLogin.addActionListener(this);
         backToLogin.setCursor(new Cursor(Cursor.HAND_CURSOR));
         backToLogin.setFont(times30Plain);
-        backToLogin.setForeground(Color.WHITE);
+        backToLogin.setBackground(Color.WHITE);
+        backToLogin.setForeground(Color.BLACK);
 
 //        adding components
         adminPanel.add(heading);
@@ -101,6 +120,7 @@ public class Admin extends JFrame implements ActionListener {
         add(adminPanel);
         setSize(1650,1080);
         setVisible(true);
+        setTitle("Admin");
         setDefaultCloseOperation(EXIT_ON_CLOSE);
     }
 //    functionality
@@ -148,5 +168,7 @@ public class Admin extends JFrame implements ActionListener {
         return menuItem;
     }
 
-
+    public static void main(String[] args) {
+        new Admin();
+    }
 }
