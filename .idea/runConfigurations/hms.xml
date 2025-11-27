@@ -1,0 +1,13 @@
+<component name="ProjectRunConfigurationManager">
+  <configuration default="false" name="hms" type="Application" factoryName="Application">
+    <envs>
+      <env name="classpath" value="C:\Users\rishi\Downloads\mysql-connector-j-9.4.0\mysql-connector-j-9.4.0\mysql-connector-j-9.4.0.jar;.;" />
+    </envs>
+    <option name="MAIN_CLASS_NAME" value="App" />
+    <module name="HospitalManagementSystem" />
+    <option name="PASS_PARENT_ENVS" value="false" />
+    <method v="2">
+      <option name="Make" enabled="true" />
+    </method>
+  </configuration>
+</component>
