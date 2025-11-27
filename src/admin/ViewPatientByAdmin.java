@@ -94,8 +94,12 @@ public class ViewPatientByAdmin extends JFrame implements ActionListener {
 //        multiple row
         try{
             resultSet = loader();
-            while (resultSet.next()){
-                generator(resultSet);
+            if(!resultSet.next()){
+                JOptionPane.showMessageDialog(this,"Data Not Available");
+            }else {
+                do {
+                    generator(resultSet);
+                }while (resultSet.next());
             }
         } catch (Exception e) {
             throw new RuntimeException(e);
