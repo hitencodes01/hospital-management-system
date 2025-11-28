@@ -4,6 +4,7 @@ import database.ConnectionDB;
 import admin.*;
 import doctor.Doctor;
 import background.BGImage;
+import reception.Reception;
 
 import javax.swing.*;
 import java.awt.*;
@@ -149,6 +150,10 @@ public class Login extends JFrame implements ActionListener  {
                             break;
                         case "Doctor" :
                             new Doctor(res);
+                            this.setVisible(false);
+                            break;
+                        case "Receptionist" :
+                            new Reception();
                             this.setVisible(false);
                             break;
                     }

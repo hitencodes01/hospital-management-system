@@ -21,7 +21,7 @@ public class Reception extends JFrame implements ActionListener {
     int total;
     String formatDate;
 
-    Reception(){
+   public Reception(){
 
         con = new ConnectionDB().connect();
         panel1 = new BGImage();
