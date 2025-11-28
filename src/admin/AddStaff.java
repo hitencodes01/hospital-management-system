@@ -41,7 +41,7 @@ public class AddStaff extends JFrame implements ActionListener {
         name = new JTextField();
         name.setBounds(700,290,300,50);
         name.setFont(times30Plain);
-        String [] choices = {"Select","Sanitation","Security","Account","Assistant","Clerk"};
+        String [] choices = {"Select","Sanitation","Security","Account","Assistant","Receptionist"};
         department = new JComboBox<>(choices);
         department.setBounds(700,380,300,50);
         department.setFont(times30Plain);
@@ -99,6 +99,19 @@ public class AddStaff extends JFrame implements ActionListener {
                     post.setInt(1,firstText);
                     post.setString(2,secondText);
                     post.setString(3,thirdText);
+
+                    if(department.equals("Receptionist")){
+                        try{
+                            PreparedStatement postReceptionist = con.prepareStatement("insert into receptionist values(?,?,?);");
+                            postReceptionist.setInt(1,firstText);
+                            postReceptionist.setString(1,secondText);
+                            postReceptionist.setString(3,"1234");
+                            int result = postReceptionist.executeUpdate();
+                        } catch (Exception e) {
+                            throw new RuntimeException(e);
+                        }
+                    }
+
                     id.setText("");
                     name.setText("");
                     department.setSelectedItem("Select");
@@ -111,6 +124,7 @@ public class AddStaff extends JFrame implements ActionListener {
                 } catch (Exception e) {
                     JOptionPane.showMessageDialog(this,"Staff already present");
                 }
+
             }
         }if(event.getSource() == backToAdmin){
             new Admin();

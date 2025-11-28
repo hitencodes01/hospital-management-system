@@ -122,6 +122,9 @@ public class Login extends JFrame implements ActionListener  {
         } else if (role.equals("Doctor")) {
             String query = "select *  from doctor where name = ? and password = ?  ;";
             verification(username,password,role,query);
+        } else if (role.equals("Receptionist")) {
+            String query = "select * from receptionist where name = ? and password = ?;";
+            verification(username,password,role,query);
         }
     }
 
