@@ -178,7 +178,7 @@ class ViewPatients extends JFrame implements ActionListener {
                 gbc.gridx = 14;
                 gbc.gridwidth = 1;
                 panel.add(roomNo,gbc);
-                assignedDocBtn = new MyButton(rs.getString("room"),20);
+                assignedDocBtn = new MyButton("Assign",20);
                 assignedDocBtn.setFont(new Font("Times New Roman",Font.BOLD,20));
                 assignedDocBtn.putClientProperty("id",patientId);
                 assignedDocBtn.setActionCommand("assigned");
@@ -253,7 +253,8 @@ class ViewPatients extends JFrame implements ActionListener {
         JButton btn = (JButton) event.getSource();
         Integer id = (int) btn.getClientProperty("id");
         if("assigned".equals(btn.getActionCommand())){
-                new AssignedDoctor();
+                new AssignedDoctor(id);
+                setVisible(false);
                 return;
         }
     }

@@ -152,14 +152,17 @@ public class ViewStaff extends JFrame implements ActionListener {
     }
 
     public void actionPerformed(ActionEvent event){
+        if(event.getSource()==back){
+            new Admin();
+            setVisible(false);
+            return;
+        }
         JButton btn = (JButton) event.getSource();
         int id = (int) btn.getClientProperty("id");
         if("remove".equals(btn.getActionCommand())){
            removeStaffMethod(id);
+           return;
         }
-        if(event.getSource()==back){
-            new Admin();
-            setVisible(false);
-        }
+
     }
 }

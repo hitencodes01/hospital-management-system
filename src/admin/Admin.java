@@ -45,7 +45,6 @@ public class Admin extends JFrame implements ActionListener {
         menuDoctor = createStyledMenu("Doctors");
         menuPatient = createStyledMenu("Patients");
         menuStaff = createStyledMenu("Staff");
-        menuVisitors = createStyledMenu("Visitors");
 
 //        menu items
 
@@ -61,7 +60,6 @@ public class Admin extends JFrame implements ActionListener {
         viewPatients = createStyledMenuItem("View");
 
 //          visitors MenuItems
-        viewVisitors = createStyledMenuItem("View");
 
 //        adding MenuItems
 
@@ -73,7 +71,6 @@ public class Admin extends JFrame implements ActionListener {
 
         menuPatient.add(viewPatients);
 
-        menuVisitors.add(viewVisitors);
 
 
         JLabel quotation1 = new JLabel("Healing takes time,");
@@ -95,13 +92,11 @@ public class Admin extends JFrame implements ActionListener {
 
 //        adding menus
         adminMenu.add(menuDoctor);
-        adminMenu.add(Box.createHorizontalStrut(40)); // spacing between menus
+        adminMenu.add(Box.createHorizontalStrut(50)); // spacing between menus
         adminMenu.add(menuStaff);
-        adminMenu.add(Box.createHorizontalStrut(40));
+        adminMenu.add(Box.createHorizontalStrut(50));
         adminMenu.add(menuPatient);
-        adminMenu.add(Box.createHorizontalStrut(40));
-        adminMenu.add(menuVisitors);
-        adminMenu.add(Box.createHorizontalStrut(400));
+        adminMenu.add(Box.createHorizontalStrut(450));
 
 //        backToLogin
         backToLogin = new JButton("Back");
@@ -110,6 +105,11 @@ public class Admin extends JFrame implements ActionListener {
         backToLogin.setFont(times30Plain);
         backToLogin.setBackground(Color.WHITE);
         backToLogin.setForeground(Color.BLACK);
+        backToLogin.setFocusPainted(false);
+        backToLogin.setBorderPainted(false);
+        backToLogin.setContentAreaFilled(false);  // avoid white inner box
+        backToLogin.setOpaque(true);              // enable custom background color
+
 
 //        adding components
         adminPanel.add(heading);
@@ -163,7 +163,7 @@ public class Admin extends JFrame implements ActionListener {
         menuItem.setFont(times30Plain);
         menuItem.setForeground(new Color(0, 0, 255));
         menuItem.setCursor(new Cursor(Cursor.HAND_CURSOR));
-        menuItem.setBorder(new EmptyBorder(10,10,10,10));
+        menuItem.setBorder(new EmptyBorder(20,20,20,20));
         menuItem.addActionListener(this);
         return menuItem;
     }

@@ -189,9 +189,12 @@ public class DoctorProfile extends JFrame implements ActionListener {
                         rs = get.executeQuery();
                         if(rs.next()){
                             JOptionPane.showMessageDialog(this, "Updated Successfully");
-                            new Doctor(rs);
-                            setVisible(false);
-                        }
+                            if(choice==1){
+                                new Doctor(rs);
+                            } else if (choice==2) {
+                                new ViewDoctor();
+                            }
+                            setVisible(false);                        }
                     } catch (Exception ex) {
                         throw new RuntimeException(ex);
                     }
