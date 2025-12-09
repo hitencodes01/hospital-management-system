@@ -100,11 +100,11 @@ public class AddStaff extends JFrame implements ActionListener {
                     post.setString(2,secondText);
                     post.setString(3,thirdText);
 
-                    if(department.equals("Receptionist")){
+                    if(thirdText.equals("Receptionist")){
                         try{
                             PreparedStatement postReceptionist = con.prepareStatement("insert into receptionist values(?,?,?);");
                             postReceptionist.setInt(1,firstText);
-                            postReceptionist.setString(1,secondText);
+                            postReceptionist.setString(2,secondText);
                             postReceptionist.setString(3,"1234");
                             int result = postReceptionist.executeUpdate();
                         } catch (Exception e) {

@@ -1,6 +1,7 @@
 package admin;
 
 import background.BGImage;
+import components.MyButton;
 import database.ConnectionDB;
 
 import javax.swing.*;
@@ -36,7 +37,7 @@ public class ViewStaff extends JFrame implements ActionListener {
         gbc.gridx = 0;
         gbc.gridwidth = 3;
         panel.add(heading,gbc);
-        back = new JButton("Back");
+        back = new MyButton("Back",20);
         back.setBackground(Color.BLUE);
         back.setForeground(Color.WHITE);
         back.addActionListener(this);

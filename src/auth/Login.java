@@ -1,5 +1,6 @@
 package auth;
 
+import components.MyButton;
 import database.ConnectionDB;
 import admin.*;
 import doctor.Doctor;
@@ -36,6 +37,11 @@ public class Login extends JFrame implements ActionListener  {
 //        fonts
        final Font timesNewRoman20Bold = new Font("Aerial" , Font.BOLD , 20);
 
+//       heading
+        JLabel heading = new JLabel("Welcome to Hospital");
+        heading.setBounds(500,100,1000,50);
+        heading.setFont(new Font("Times New Roman",Font.BOLD,50));
+        panel.add(heading);
 //        labels
         name = new JLabel("Username");
         name.setBounds(550,200,100,40);
@@ -56,7 +62,7 @@ public class Login extends JFrame implements ActionListener  {
         passwordField.setFont(timesNewRoman20Bold);
 
 //        buttons
-        login = new JButton("Login");
+        login = new MyButton("Login",50);
         login.setBounds(700 , 400 , 100 ,50 );
         login.addActionListener(this);
         login.setFont(timesNewRoman20Bold);
@@ -115,17 +121,21 @@ public class Login extends JFrame implements ActionListener  {
 
 //    login user function
     protected void loginUser(String username ,String password,String role){
-        if(role.equals("Admin")){
-            String query = "select name , password  from admin where name = ? and password = ?  ;";
-            verification(username,password,role,query);
-
-        } else if (role.equals("Doctor")) {
-            String query = "select *  from doctor where name = ? and password = ?  ;";
-            verification(username,password,role,query);
-        } else if (role.equals("Receptionist")) {
-            String query = "select * from receptionist where name = ? and password = ?;";
-            verification(username,password,role,query);
+        switch (role) {
+            case "Admin" -> {
+                String query = "select name , password  from admin where name = ? and password = ?  ;";
+                verification(username, password, role, query);
+            }
+            case "Doctor" -> {
+                String query = "select *  from doctor where name = ? and password = ?  ;";
+                verification(username, password, role, query);
+            }
+            case "Receptionist" -> {
+                String query = "select * from receptionist where name = ? and password = ?;";
+                verification(username, password, role, query);
+            }
         }
+
     }
 
 //    verification function
@@ -139,29 +149,26 @@ public class Login extends JFrame implements ActionListener  {
             textFieldName.setText("");
             passwordField.setText("");
             combRole.setSelectedItem("Select");
-//       verification
             if(res.next()){
-                String usernameFromDB = res.getString("name");
-                String passwordFromDB = res.getString("password");
-                if(username.equals(usernameFromDB) && password.equals(passwordFromDB)){
-                    String message = "Welcome " + usernameFromDB ;
-                    JOptionPane.showMessageDialog(this,message);
-                    switch (role) {
-                        case "Admin" :
-                            new Admin();
-                            this.setVisible(false);
-                            break;
-                        case "Doctor" :
-                            new Doctor(res);
-                            this.setVisible(false);
-                            break;
-                        case "Receptionist" :
-                            new Reception();
-                            this.setVisible(false);
-                            break;
+                String message = "Welcome " + username ;
+                JOptionPane.showMessageDialog(this,message);
+                switch (role) {
+                    case "Admin" -> {
+                        new Admin();
+                        this.setVisible(false);
+                        break;
+                    }case "Doctor" -> {
+                        new Doctor(res);
+                        this.setVisible(false);
+                        break;
                     }
-                }else {
-                    JOptionPane.showMessageDialog(this,"User Not Found!");
+
+                    case "Receptionist" ->{
+                        new Reception();
+                        this.setVisible(false);
+                        break;
+                    }
+
                 }
             }else {
                 JOptionPane.showMessageDialog(this,"Incorrect Username or Password!");

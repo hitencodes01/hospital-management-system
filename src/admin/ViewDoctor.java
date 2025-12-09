@@ -1,6 +1,7 @@
 package admin;
 
 import background.BGImage;
+import components.MyButton;
 import database.ConnectionDB;
 import doctor.DoctorProfile;
 
@@ -42,7 +43,7 @@ public class ViewDoctor extends JFrame implements ActionListener {
         gbc.gridx = 0;
         gbc.gridwidth = 3;
         viewDoctor.add(heading,gbc);
-        back = new JButton("Back");
+        back = new MyButton("Back",20);
         back.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -135,7 +136,7 @@ public class ViewDoctor extends JFrame implements ActionListener {
             gbc.gridx = 4;
             gbc.gridwidth = 3;
             viewDoctor.add(specialization,gbc);
-            viewDoc = new JButton("View");
+            viewDoc = new MyButton("View",20);
             viewDoc.setFont(new Font("Times New Roman",Font.PLAIN,10));
             viewDoc.putClientProperty("id", doctorId);
             viewDoc.setActionCommand("view");
@@ -144,7 +145,7 @@ public class ViewDoctor extends JFrame implements ActionListener {
             gbc.gridwidth = 1;
             viewDoctor.add(viewDoc,gbc);
             viewButtons.add(viewDoc);
-            removeDoc = new JButton("Remove");
+            removeDoc = new MyButton("Remove",20);
             removeDoc.setFont(new Font("Times New Roman",Font.PLAIN,10));
             removeDoc.putClientProperty("id", doctorId);
             removeDoc.setActionCommand("remove");

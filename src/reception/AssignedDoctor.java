@@ -3,8 +3,6 @@ package reception;
 import background.BGImage;
 import components.MyButton;
 import database.ConnectionDB;
-
-import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -12,7 +10,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.HashMap;
-import java.util.List;
+import javax.swing.*;
 
 
 public class AssignedDoctor extends JFrame implements ActionListener {
@@ -31,16 +29,16 @@ public class AssignedDoctor extends JFrame implements ActionListener {
         panel.setLayout(null);
         getDoctors();
         JLabel selectLabel = new JLabel("Select Doctor");
-        selectLabel.setFont(new Font("Times New Roman",Font.BOLD,50));
-        selectLabel.setBounds(300,200,100,30);
+        selectLabel.setFont(new Font("Times New Roman",Font.BOLD,30));
+        selectLabel.setBounds(550,200,200,30);
         panel.add(selectLabel);
-        String [] doctorsName = {"Select","hiten","Aman"};
+        String [] doctorsName = {"Select","Doctor1","Doctor2"};
         doctors = new JComboBox<String>(doctorsName);
-        doctors.setBounds(500,200,200,50);
+        doctors.setBounds(750,200,200,30);
         doctors.setFont(new Font("Times New Roman",Font.BOLD,30));
         panel.add(doctors);
-        assigned = new MyButton("Assign",50);
-        assigned.setBounds(500,400,100,100);
+        assigned = new MyButton("Assign",30);
+        assigned.setBounds(600,280,300,50);
         assigned.addActionListener(this);
         panel.add(assigned);
         add(panel);
@@ -58,6 +56,8 @@ public class AssignedDoctor extends JFrame implements ActionListener {
             String selectedDoctor = String.valueOf(obj);
             try{
                 uploader(id,selectedDoctor);
+                new Reception();
+                this.setVisible(false);
 
             } catch (Exception e) {
                 throw new RuntimeException(e);
@@ -89,7 +89,6 @@ public class AssignedDoctor extends JFrame implements ActionListener {
             resultSet = get.executeQuery();
             while (resultSet.next()){
                 doctorsData.put(resultSet.getString("name"),resultSet.getInt("id"));
-
             }
         } catch (Exception e) {
             throw new RuntimeException(e);
