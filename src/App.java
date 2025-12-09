@@ -1,8 +1,4 @@
-
-import auth.Login;
+package PACKAGE_NAME;
 
 public class App {
-    public static void main(String[] args) {
-        new Login();
-    }
 }
